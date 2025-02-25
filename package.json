@@ -1,0 +1,21 @@
+{
+	"name": "misslo",
+	"version": "1.0.0",
+	"description": "Association app",
+	"main": "app.js",
+	"type": "module",
+	"scripts": {
+		"dev": "nodemon app.js"
+	},
+	"author": "me",
+	"license": "ISC",
+	"dependencies": {
+		"@prisma/client": "^6.4.1",
+		"argon2": "^0.41.1",
+		"dotenv": "^16.4.7",
+		"express": "^4.21.2"
+	},
+	"devDependencies": {
+		"prisma": "^6.4.1"
+	}
+}

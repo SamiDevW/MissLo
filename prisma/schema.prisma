@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model candidatures {
+  idMission Int
+  idUser    Int
+  status    String?  @default("en attente") @db.VarChar(50)
+  missions  missions @relation(fields: [idMission], references: [idMission], onDelete: Cascade, onUpdate: Restrict, map: "candidatures_ibfk_1")
+  users     users    @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: Restrict, map: "candidatures_ibfk_2")
+
+  @@id([idMission, idUser])
+  @@index([idUser], map: "idUser")
+}
+
+model missions {
+  idMission    Int            @id @default(autoincrement())
+  title        String?        @db.VarChar(100)
+  description  String?        @db.Text
+  startDate    DateTime?      @db.Date
+  endDate      DateTime?      @db.Date
+  createdAt    DateTime?      @default(now()) @db.DateTime(0)
+  idUser       Int?
+  candidatures candidatures[]
+  users        users?         @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: Restrict, map: "missions_ibfk_1")
+
+  @@index([idUser], map: "idUser")
+}
+
+model users {
+  idUser       Int            @id @default(autoincrement())
+  name         String?        @db.VarChar(100)
+  email        String?        @db.VarChar(100)
+  username     String?        @db.VarChar(100)
+  password     String?        @db.VarChar(100)
+  user_role    String?        @db.VarChar(50)
+  candidatures candidatures[]
+  missions     missions[]
+}
