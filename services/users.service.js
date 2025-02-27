@@ -1,5 +1,7 @@
 import UsersRepository from "../repository/users.repository.js";
+import ExpressError from "../utils/ExpressError.js";
 import { hashPassword, checkPassword } from "./auth/argonAuth.js";
+import { jwtSign } from "./auth/jwtAuth.js";
 
 class UsersService {
     constructor() {
@@ -24,12 +26,14 @@ class UsersService {
     }
     async loginUser(password, email) {
         const foundUser = await this.usersRepository.getUserByEmail(email)
-        if (!foundUser) throw new Error('wrong credentials')
+        if (!foundUser) throw new ExpressError(401, 'Mot de passe ou identifiant incorrect')
         const match = await checkPassword(foundUser.password, password)
-        if (!match) throw new Error('wrong credentials')
-        //JWT
-        // return JWT
-        return foundUser
+        if (!match) throw new ExpressError(401, 'Mot de passe ou identifiant incorrect')
+        else {
+            const token = jwtSign(foundUser);
+            return { foundUser, token }
+        }
+
     }
 }
 export default UsersService;

@@ -3,19 +3,7 @@ const router = express.Router();
 import UsersController from '../controllers/users.controller.js';
 const usersController = new UsersController();
 
-router.post('/register', async (req, res, next) => {
-    try {
-        await usersController.createUser(req, res)
-    } catch (err) {
-        console.error(err);
-    }
-
-})
-router.post('/login', async (req, res) => {
-    try {
-        await usersController.loginUser(req, res)
-    } catch (err) {
-        console.error(err);
-    }
-})
+router.post('/register', (req, res, next) => usersController.createUser(req, res, next))
+router.post('/login', (req, res, next) => usersController.loginUser(req, res, next))
+router.post('/logout', (req, res, next) => usersController.logoutUser(req, res, next))
 export default router;

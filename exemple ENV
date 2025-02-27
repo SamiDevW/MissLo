@@ -1,2 +1,3 @@
 DATABASE_URL=mysql://username:password@localhost:3307/<db_name>?connection_limit=5
 PORT=3500
+JWT_SECRET=secret

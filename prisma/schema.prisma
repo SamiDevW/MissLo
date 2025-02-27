@@ -8,13 +8,14 @@ datasource db {
 }
 
 model candidatures {
-  idMission Int
-  idUser    Int
-  status    String?  @default("en attente") @db.VarChar(50)
-  missions  missions @relation(fields: [idMission], references: [idMission], onDelete: Cascade, onUpdate: Restrict, map: "candidatures_ibfk_1")
-  users     users    @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: Restrict, map: "candidatures_ibfk_2")
+  idCandidature Int       @id @default(autoincrement())
+  idMission     Int?
+  idUser        Int?
+  status        String?   @default("en attente") @db.VarChar(50)
+  missions      missions? @relation(fields: [idMission], references: [idMission], onDelete: Cascade, onUpdate: Restrict, map: "candidatures_ibfk_1")
+  users         users?    @relation(fields: [idUser], references: [idUser], onDelete: Cascade, onUpdate: Restrict, map: "candidatures_ibfk_2")
 
-  @@id([idMission, idUser])
+  @@unique([idMission, idUser], map: "idMission")
   @@index([idUser], map: "idUser")
 }
 
@@ -22,8 +23,8 @@ model missions {
   idMission    Int            @id @default(autoincrement())
   title        String?        @db.VarChar(100)
   description  String?        @db.Text
-  startDate    DateTime?      @db.Date
-  endDate      DateTime?      @db.Date
+  startDate    DateTime?      @db.DateTime(0)
+  endDate      DateTime?      @db.DateTime(0)
   createdAt    DateTime?      @default(now()) @db.DateTime(0)
   idUser       Int?
   candidatures candidatures[]
@@ -35,7 +36,7 @@ model missions {
 model users {
   idUser       Int            @id @default(autoincrement())
   name         String?        @db.VarChar(100)
-  email        String?        @db.VarChar(100)
+  email        String?        @unique(map: "email") @db.VarChar(100)
   username     String?        @db.VarChar(100)
   password     String?        @db.VarChar(100)
   user_role    String?        @db.VarChar(50)

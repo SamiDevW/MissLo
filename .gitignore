@@ -1,3 +1,4 @@
 .env
 mockedData.js
 node_modules
+jsonMocked.json
