@@ -22,7 +22,7 @@ class MissionsRepository {
         } catch (err) {
             console.error(err)
             await prisma.$disconnect();
-            process.exit(1)
+            throw new Error(err)
         }
     }
     async getMissions() {
@@ -33,20 +33,57 @@ class MissionsRepository {
         } catch (err) {
             console.error(err)
             await prisma.$disconnect();
-            process.exit(1);
+            throw new Error(err)
         }
     }
-    async getUserById(email) {
+    async getMissionById(idMission) {
         try {
-            const user = await prisma.users.findFirst({
-                where: { email: email }
+            const mission = await prisma.missions.findUnique({
+                where: { idMission: parseInt(idMission) }
             });
             await prisma.$disconnect();
-            return user;
+            return mission;
         } catch (err) {
             console.error(err)
             await prisma.$disconnect();
-            process.exit(1);
+            throw new Error(err)
+        }
+    }
+    async updateMission(idMission, { title,
+        description,
+        startDate,
+        endDate,
+    }) {
+        try {
+            const mission = await prisma.missions.update({
+                where: { idMission: parseInt(idMission) },
+                data:
+                {
+                    title,
+                    description,
+                    startDate,
+                    endDate,
+                }
+            });
+            await prisma.$disconnect();
+            return mission;
+        } catch (err) {
+            console.error(err)
+            await prisma.$disconnect();
+            throw new Error(err)
+        }
+    }
+    async deleteMission(idMission) {
+        try {
+            const mission = await prisma.missions.delete({
+                where: { idMission: parseInt(idMission) }
+            });
+            await prisma.$disconnect();
+            return mission;
+        } catch (err) {
+            console.error(err)
+            await prisma.$disconnect();
+            throw new Error(err)
         }
     }
 }

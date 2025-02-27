@@ -22,7 +22,7 @@ class UsersRepository {
         } catch (err) {
             console.error(err)
             await prisma.$disconnect();
-            process.exit(1)
+            throw new Error(err)
         }
     }
     async getUsers() {
@@ -33,12 +33,12 @@ class UsersRepository {
         } catch (err) {
             console.error(err)
             await prisma.$disconnect();
-            process.exit(1);
+            throw new Error(err)
         }
     }
     async getUserByEmail(email) {
         try {
-            const user = await prisma.users.findFirst({
+            const user = await prisma.users.findUnique({
                 where: { email: email }
             });
             await prisma.$disconnect();
@@ -46,7 +46,7 @@ class UsersRepository {
         } catch (err) {
             console.error(err)
             await prisma.$disconnect();
-            process.exit(1);
+            throw new Error(err)
         }
     }
 }
