@@ -12,6 +12,5 @@ const jwtCheck = (req, res, next) => {
         console.error(err);
         res.status(401).json({ message: "Vous n'êtes pas connécté" })
     }
-
 }
 export default jwtCheck;

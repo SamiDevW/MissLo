@@ -3,19 +3,18 @@ class MissionsService {
     constructor() {
         this.missionsRepository = new MissionsRepository()
     }
-    async createMission({
-        title,
-        description,
-        startDate,
-        endDate,
-        idUser
-    }) {
-        const mission = await this.missionsRepository.createMission({
+    async createMission(
+        idUser, {
             title,
             description,
             startDate,
-            endDate,
-            idUser
+            endDate
+        }) {
+        const mission = await this.missionsRepository.createMission(idUser, {
+            title,
+            description,
+            startDate,
+            endDate
         })
         return mission;
     }
@@ -26,6 +25,10 @@ class MissionsService {
     async getMission(idMission) {
         const mission = await this.missionsRepository.getMissionById(idMission)
         return mission
+    }
+    async getCandidaturesByMission(idMission) {
+        const candidatures = await this.missionsRepository.getCandidaturesByMission(idMission)
+        return candidatures;
     }
     async updateMission(idMission, { title,
         description,

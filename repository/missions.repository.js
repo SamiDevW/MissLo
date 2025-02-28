@@ -1,12 +1,13 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
+
+
 class MissionsRepository {
-    async createMission({
+    async createMission(idUser, {
         title,
         description,
         startDate,
-        endDate,
-        idUser }) {
+        endDate }) {
         try {
             const mission = await prisma.missions.create({
                 data: {
@@ -22,7 +23,7 @@ class MissionsRepository {
         } catch (err) {
             console.error(err)
             await prisma.$disconnect();
-            throw new Error(err)
+            errorHandler(err)
         }
     }
     async getMissions() {
@@ -33,7 +34,7 @@ class MissionsRepository {
         } catch (err) {
             console.error(err)
             await prisma.$disconnect();
-            throw new Error(err)
+            errorHandler(err)
         }
     }
     async getMissionById(idMission) {
@@ -46,7 +47,33 @@ class MissionsRepository {
         } catch (err) {
             console.error(err)
             await prisma.$disconnect();
-            throw new Error(err)
+            errorHandler(err)
+        }
+    }
+    async getCandidaturesByMission(idMission) {
+        try {
+            const allcandidatures = await prisma.missions.findUnique({
+
+                where: { idMission: parseInt(idMission) }
+                , include: {
+                    candidatures: {
+                        include: {
+                            users: {
+                                select: {
+                                    username: true
+                                }
+                            }
+                        }
+
+                    }
+                }
+            });
+            await prisma.$disconnect();
+            return allcandidatures;
+        } catch (err) {
+            console.error(err)
+            await prisma.$disconnect();
+            errorHandler(err)
         }
     }
     async updateMission(idMission, { title,
@@ -70,7 +97,7 @@ class MissionsRepository {
         } catch (err) {
             console.error(err)
             await prisma.$disconnect();
-            throw new Error(err)
+            errorHandler(err)
         }
     }
     async deleteMission(idMission) {
@@ -83,7 +110,7 @@ class MissionsRepository {
         } catch (err) {
             console.error(err)
             await prisma.$disconnect();
-            throw new Error(err)
+            errorHandler(err)
         }
     }
 }

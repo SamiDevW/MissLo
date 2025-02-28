@@ -1,5 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
+
+
 class UsersRepository {
     async createUser({
         name,
@@ -22,7 +24,7 @@ class UsersRepository {
         } catch (err) {
             console.error(err)
             await prisma.$disconnect();
-            throw new Error(err)
+            errorHandler(err)
         }
     }
     async getUsers() {
@@ -33,7 +35,7 @@ class UsersRepository {
         } catch (err) {
             console.error(err)
             await prisma.$disconnect();
-            throw new Error(err)
+            errorHandler(err)
         }
     }
     async getUserByEmail(email) {
@@ -46,7 +48,7 @@ class UsersRepository {
         } catch (err) {
             console.error(err)
             await prisma.$disconnect();
-            throw new Error(err)
+            errorHandler(err)
         }
     }
 }
