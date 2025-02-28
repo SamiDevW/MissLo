@@ -1,0 +1,37 @@
+[
+	{
+		"name": "Alice Johnson",
+		"email": "alice.johnson@example.com",
+		"username": "alicej",
+		"password": "password123",
+		"user_role": "benevole"
+	},
+	{
+		"name": "Bob Smith",
+		"email": "bob.smith@example.com",
+		"username": "bobsmith",
+		"password": "securepass",
+		"user_role": "association"
+	},
+	{
+		"name": "Charlie Brown",
+		"email": "charlie.brown@example.com",
+		"username": "charlieb",
+		"password": "charliepass",
+		"user_role": "benevole"
+	},
+	{
+		"name": "Diana Prince",
+		"email": "diana.prince@example.com",
+		"username": "dianap",
+		"password": "wonderpass",
+		"user_role": "association"
+	},
+	{
+		"name": "Ethan Hunt",
+		"email": "ethan.hunt@example.com",
+		"username": "ethanh",
+		"password": "missionpass",
+		"user_role": "benevole"
+	}
+]

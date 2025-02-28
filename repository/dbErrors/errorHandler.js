@@ -10,7 +10,7 @@ const errorHandler = (err) => {
         throw new DatabaseError(404, 'élément introuvable')
     }
     if (err.code === 'P2002') {
-        throw new DatabaseError(400, 'élément already exists')
+        throw new DatabaseError(400, 'cet élément existe déja')
     }
     else {
         throw new DatabaseError(500, 'Database error')
