@@ -1,19 +1,21 @@
 import MissionsService from "../services/missions.service.js";
+
+
 class MissionsController {
     constructor() {
         this.missionsService = new MissionsService()
     }
     async createMission(req, res, next) {
-        if (!req.body?.title || !req.body?.description || !req.body?.startDate || !req.body?.endDate || !req.body?.idUser) {
+        if (!req.body?.title || !req.body?.description || !req.body?.startDate || !req.body?.endDate) {
             res.status(400).json({ message: 'Bad Request' })
         }
         try {
-            const mission = await this.missionsService.createMission(req.body)
+            const { idUser } = req.user
+            const mission = await this.missionsService.createMission(idUser, req.body)
             res.status(201).json({ mission, message: `La mission ${mission.title} a été créée` })
         } catch (err) {
             console.error(err);
             next(err)
-
         }
     }
     async getMissions(req, res, next) {
@@ -24,7 +26,6 @@ class MissionsController {
         } catch (err) {
             console.error(err);
             next(err)
-
         }
     }
     async getMission(req, res, next) {
@@ -38,6 +39,17 @@ class MissionsController {
             next(err)
         }
     }
+    async getCandidaturesByMission(req, res, next) {
+        try {
+            const { idMission } = req.params
+            const candidatures = await this.missionsService.getCandidaturesByMission(idMission)
+            res.status(200).json(candidatures);
+        } catch (err) {
+            console.error(err);
+            next(err)
+        }
+
+    }
     async updateMission(req, res, next) {
         if (!req.body?.title || !req.body?.description || !req.body?.startDate || !req.body?.endDate) {
             res.status(400).json({ message: 'Mauvaise requête, éléments manquants' })
@@ -49,7 +61,6 @@ class MissionsController {
         } catch (err) {
             console.error(err);
             next(err)
-
         }
     }
     async deleteMission(req, res, next) {
@@ -60,7 +71,6 @@ class MissionsController {
         } catch (err) {
             console.error(err);
             next(err)
-
         }
     }
 }

@@ -1,5 +1,8 @@
 import { PrismaClient } from '@prisma/client';
+import errorHandler from './dbErrors/errorHandler.js';
 const prisma = new PrismaClient();
+
+
 class CandidaturesRepository {
     async createCandidature(idMission, idUser) {
         try {
@@ -14,35 +17,28 @@ class CandidaturesRepository {
         } catch (err) {
             console.error(err)
             await prisma.$disconnect();
-            throw new Error(err)
+            errorHandler(err)
         }
     }
-    async getCandidaturesByMission(idMission) {
+    async getCandidaturesByUser(idUser) {
         try {
-            const allcandidatures = await prisma.missions.findUnique({
-
-                where: { idMission: parseInt(idMission) }
-                , include: {
-                    candidatures: {
-                        include: {
-                            users: {
-                                select: {
-                                    username: true
-                                }
-                            }
-                        }
-
-                    }
+            const candidature = await prisma.candidatures.findMany({
+                where: {
+                    idUser: idUser
+                },
+                include: {
+                    missions: true
                 }
             });
             await prisma.$disconnect();
-            return allcandidatures;
+            return candidature;
         } catch (err) {
             console.error(err)
             await prisma.$disconnect();
-            throw new Error(err)
+            errorHandler(err)
         }
     }
+
     async updateCandidature(idCandidature, status) {
         try {
             const candidature = await prisma.candidatures.update({
@@ -54,10 +50,9 @@ class CandidaturesRepository {
         } catch (err) {
             console.error(err)
             await prisma.$disconnect();
-            throw new Error(err)
+            errorHandler(err)
         }
     }
-
 }
 
 

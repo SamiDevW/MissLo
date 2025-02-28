@@ -18,7 +18,7 @@ Pour demarrer l'application il faut :
   `npm install`
 - creer un fichier .env en se basant sur exemple ENV
 - creer la base de données a partir du fichier prisma
-  `npx prisma db push`
+  `npx prisma db push` https://www.prisma.io/docs/orm/reference/prisma-cli-reference#db-push
 - update the prisma client
   `npx prisma generate`
 - lancer le serveur
@@ -26,6 +26,13 @@ Pour demarrer l'application il faut :
 
 # Using the api
 
-La documentation est disponible en ligne : https://documenter.getpostman.com/view/39337832/2sAYdeNCQU
+La documentation est disponible en ligne : https://documenter.getpostman.com/view/39337832/2sAYdhJVZX
 
 - Note: la variable raw dans les exemples de requetes bug et s'affiche en string, mais c'est bien un json qui est attendu.
+
+# Doing tests
+
+Aprés avoir réussi les premières etapes.
+Pour faire les tests http, un fichier postman est disponible `MissLo.tests.json`
+Ce fichier doit être importé sur postman
+https://documenter.getpostman.com/view/39337832/2sAYdhJptg

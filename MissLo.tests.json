@@ -1,0 +1,1046 @@
+{
+	"info": {
+		"_postman_id": "d91316b4-1f2d-4490-914d-2a15a46edcd9",
+		"name": "MissLo",
+		"description": "MissLo est une API permettant de créer et gérer des missions locales publiées par les associations, où les bénévoles peuvent candidater.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39337832"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "createUser (benevole)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json()\r",
+									"pm.collectionVariables.set('idUser', response.user.idUser)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n    \"name\": \"Sam\",\r\n    \"email\": \"samsung@example.com\",\r\n    \"username\": \"samsung\",\r\n    \"password\": \"missionpass\",\r\n    \"user_role\": \"benevole\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3500/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3500",
+							"path": [
+								"register"
+							]
+						},
+						"description": "Ce point de terminaison permet à l'utilisateur d'enregistrer un nouvel utilisateur avec les détails fournis.\n\n**Corps de la Requête**\n\n- `name` (chaîne de caractères) : Le nom de l'utilisateur.\n    \n- `email` (chaîne de caractères) : L'adresse e-mail de l'utilisateur.\n    \n- `username` (chaîne de caractères) : Le nom d'utilisateur choisi par l'utilisateur.\n    \n- `password` (chaîne de caractères) : Le mot de passe pour le compte utilisateur.\n    \n- `user_role` (chaîne de caractères) : Le rôle de l'utilisateur (par exemple, \"bénévole\").\n    \n\n**Réponse**\n\nLa réponse est un objet JSON avec le schéma suivant :\n\n``` json\n{\n    \"user\": {\n        \"idUser\": 0,\n        \"name\": \"\",\n        \"email\": \"\",\n        \"username\": \"\",\n        \"password\": \"\",\n        \"user_role\": \"\"\n    },\n    \"message\": \"\"\n}\n\n ```\n\n- `user` (objet) : Un objet représentant l'utilisateur enregistré avec les propriétés suivantes :\n    \n    - `idUser` (nombre) : L'identifiant unique de l'utilisateur.\n        \n    - `name` (chaîne de caractères) : Le nom de l'utilisateur.\n        \n    - `email` (chaîne de caractères) : L'adresse e-mail de l'utilisateur.\n        \n    - `username` (chaîne de caractères) : Le nom d'utilisateur choisi par l'utilisateur.\n        \n    - `password` (chaîne de caractères) : Le mot de passe pour le compte utilisateur.\n        \n    - `user_role` (chaîne de caractères) : Le rôle de l'utilisateur.\n        \n- `message` (chaîne de caractères) : Un message indiquant l'état du processus d'enregistrement.\n    \n- **Note** : Les valeurs réelles des propriétés de l'utilisateur seront renseignées en fonction des détails d'enregistrement fournis."
+					},
+					"response": [
+						{
+							"name": "createUser",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\r\n    \"name\": \"Ethan Hunt\",\r\n    \"email\": \"samsung@example.com\",\r\n    \"username\": \"ethanh\",\r\n    \"password\": \"missionpass\",\r\n    \"user_role\": \"association\"\r\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3500/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3500",
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "276"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"114-cMhEO6lGhTM0ELImuv2rfxthSzM\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Feb 2025 13:59:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"idUser\": 6,\n        \"name\": \"Ethan Hunt\",\n        \"email\": \"samsung@example.com\",\n        \"username\": \"ethanh\",\n        \"password\": \"$argon2id$v=19$m=65536,t=3,p=4$K9oq0SjCoLdnpe7zsZMwWQ$rHKtkt7Onm3j6HMRH1TpM6nmKZdZkXV0HQQbot/eRtU\",\n        \"user_role\": \"association\"\n    },\n    \"message\": \"Un compte pour ethanh a été crée\"\n}"
+						}
+					]
+				},
+				{
+					"name": "createUser (association)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json()\r",
+									"pm.collectionVariables.set('idUser', response.user.idUser)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"Xiao\",\r\n        \"email\": \"Xiaomi@example.com\",\r\n        \"password\": \"assopass\",\r\n        \"username\": \"Xiaomi\",\r\n        \"user_role\": \"association\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3500/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3500",
+							"path": [
+								"register"
+							]
+						},
+						"description": "Ce point de terminaison permet à l'utilisateur d'enregistrer un nouvel utilisateur avec les détails fournis.\n\n**Corps de la Requête**\n\n- `name` (chaîne de caractères) : Le nom de l'utilisateur.\n    \n- `email` (chaîne de caractères) : L'adresse e-mail de l'utilisateur.\n    \n- `username` (chaîne de caractères) : Le nom d'utilisateur choisi par l'utilisateur.\n    \n- `password` (chaîne de caractères) : Le mot de passe pour le compte utilisateur.\n    \n- `user_role` (chaîne de caractères) : Le rôle de l'utilisateur (par exemple, \"bénévole\").\n    \n\n**Réponse**\n\nLa réponse est un objet JSON avec le schéma suivant :\n\n``` json\n{\n    \"user\": {\n        \"idUser\": 0,\n        \"name\": \"\",\n        \"email\": \"\",\n        \"username\": \"\",\n        \"password\": \"\",\n        \"user_role\": \"\"\n    },\n    \"message\": \"\"\n}\n\n ```\n\n- `user` (objet) : Un objet représentant l'utilisateur enregistré avec les propriétés suivantes :\n    \n    - `idUser` (nombre) : L'identifiant unique de l'utilisateur.\n        \n    - `name` (chaîne de caractères) : Le nom de l'utilisateur.\n        \n    - `email` (chaîne de caractères) : L'adresse e-mail de l'utilisateur.\n        \n    - `username` (chaîne de caractères) : Le nom d'utilisateur choisi par l'utilisateur.\n        \n    - `password` (chaîne de caractères) : Le mot de passe pour le compte utilisateur.\n        \n    - `user_role` (chaîne de caractères) : Le rôle de l'utilisateur.\n        \n- `message` (chaîne de caractères) : Un message indiquant l'état du processus d'enregistrement.\n    \n- **Note** : Les valeurs réelles des propriétés de l'utilisateur seront renseignées en fonction des détails d'enregistrement fournis."
+					},
+					"response": [
+						{
+							"name": "createUser",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\r\n    \"name\": \"Ethan Hunt\",\r\n    \"email\": \"samsung@example.com\",\r\n    \"username\": \"ethanh\",\r\n    \"password\": \"missionpass\",\r\n    \"user_role\": \"association\"\r\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3500/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3500",
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "276"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"114-cMhEO6lGhTM0ELImuv2rfxthSzM\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Feb 2025 13:59:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"idUser\": 6,\n        \"name\": \"Ethan Hunt\",\n        \"email\": \"samsung@example.com\",\n        \"username\": \"ethanh\",\n        \"password\": \"$argon2id$v=19$m=65536,t=3,p=4$K9oq0SjCoLdnpe7zsZMwWQ$rHKtkt7Onm3j6HMRH1TpM6nmKZdZkXV0HQQbot/eRtU\",\n        \"user_role\": \"association\"\n    },\n    \"message\": \"Un compte pour ethanh a été crée\"\n}"
+						}
+					]
+				},
+				{
+					"name": "loginUser (benevole)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n    \"email\": \"samsung@example.com\",\r\n    \"password\": \"missionpass\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3500/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3500",
+							"path": [
+								"login"
+							]
+						},
+						"description": "Ce point de terminaison permet aux utilisateurs de se connecter en fournissant leur adresse e-mail et leur mot de passe.\n\n**Corps de la Requête**\n\n- `email` (chaîne de caractères) : L'adresse e-mail de l'utilisateur.\n    \n- `password` (chaîne de caractères) : Le mot de passe du compte utilisateur.\n    \n\n**Réponse**\n\nLa réponse inclura le jeton d'authentification de l'utilisateur en cas de connexion réussie sous forme d'un cookie et d'un message de confirmation d'authentification.\n\n**Exemple de Réponse**\n\n``` json\n{\n    \"message\": \"\"\n}\n\n ```\n\n#### JSON Schema\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"message\": {\n            \"type\": \"string\"\n        }\n    }\n}\n\n ```"
+					},
+					"response": [
+						{
+							"name": "loginUser",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\r\n    \"email\": \"samsung@example.com\",\r\n    \"password\": \"missionpass\"\r\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3500/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3500",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjYsInVzZXJfcm9sZSI6ImFzc29jaWF0aW9uIiwiaWF0IjoxNzQwNjY1NzU2LCJleHAiOjE3NDA2NjkzNTZ9.cDqcQ_8EtnGfVk183kT6A-UaAkPSTc-mTxPzVwyFgFw; Path=/; Expires=Thu, 27 Feb 2025 15:15:56 GMT; HttpOnly"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"23-M1Ca0GkbDU7p3HU9lPsYR8ZzEI8\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Feb 2025 14:15:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Bon retour Ethan Hunt\"\n}"
+						},
+						{
+							"name": "loginUser",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\r\n    \"email\": \"samsung@exampe.com\",\r\n    \"password\": \"missionpass\"\r\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3500/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3500",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-Sw9iXfXwXrt4g2ICCJpR7slqObE\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Feb 2025 14:23:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Mot de passe ou identifiant incorrect\"\n}"
+						}
+					]
+				},
+				{
+					"name": "loginUser (association)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n    \"email\": \"Xiaomi@example.com\",\r\n    \"password\": \"assopass\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3500/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3500",
+							"path": [
+								"login"
+							]
+						},
+						"description": "Ce point de terminaison permet aux utilisateurs de se connecter en fournissant leur adresse e-mail et leur mot de passe.\n\n**Corps de la Requête**\n\n- `email` (chaîne de caractères) : L'adresse e-mail de l'utilisateur.\n    \n- `password` (chaîne de caractères) : Le mot de passe du compte utilisateur.\n    \n\n**Réponse**\n\nLa réponse inclura le jeton d'authentification de l'utilisateur en cas de connexion réussie sous forme d'un cookie et d'un message de confirmation d'authentification.\n\n**Exemple de Réponse**\n\n``` json\n{\n    \"message\": \"\"\n}\n\n ```\n\n#### JSON Schema\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"message\": {\n            \"type\": \"string\"\n        }\n    }\n}\n\n ```"
+					},
+					"response": [
+						{
+							"name": "loginUser",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\r\n    \"email\": \"samsung@example.com\",\r\n    \"password\": \"missionpass\"\r\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3500/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3500",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjYsInVzZXJfcm9sZSI6ImFzc29jaWF0aW9uIiwiaWF0IjoxNzQwNjY1NzU2LCJleHAiOjE3NDA2NjkzNTZ9.cDqcQ_8EtnGfVk183kT6A-UaAkPSTc-mTxPzVwyFgFw; Path=/; Expires=Thu, 27 Feb 2025 15:15:56 GMT; HttpOnly"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"23-M1Ca0GkbDU7p3HU9lPsYR8ZzEI8\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Feb 2025 14:15:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Bon retour Ethan Hunt\"\n}"
+						},
+						{
+							"name": "loginUser",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "  {\r\n    \"email\": \"samsung@exampe.com\",\r\n    \"password\": \"missionpass\"\r\n  }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3500/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3500",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-Sw9iXfXwXrt4g2ICCJpR7slqObE\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Feb 2025 14:23:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Mot de passe ou identifiant incorrect\"\n}"
+						}
+					]
+				},
+				{
+					"name": "logoutUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3500/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3500",
+							"path": [
+								"logout"
+							]
+						},
+						"description": "Ce point de terminaison est utilisé pour déconnecter l'utilisateur du système.\n\n**Corps de la Requête**\n\nAucun corps de requête n'est requis pour ce point de terminaison.\n\n**Réponse**\n\nLa réponse indiquera le succès ou l'échec de l'opération de déconnexion. Le schéma de la réponse est le suivant :  \n  \n\n``` json\n{\n    \"message\": \"\"\n}\n\n ```"
+					},
+					"response": []
+				}
+			],
+			"description": "MissLo permet de créer deux types d'utilisateurs : bénévoles et associations, chacun ayant des autorisations spécifiques selon leur rôle."
+		},
+		{
+			"name": "missions",
+			"item": [
+				{
+					"name": "createMission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json()\r",
+									"pm.collectionVariables.set('idMission', response.mission.idMission)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Beach Cleanup\",\r\n    \"description\": \"A community effort to clean up the local beach.\",\r\n    \"startDate\": \"2024-01-15T00:00:00Z\",\r\n    \"endDate\": \"2024-01-15T00:00:00Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3500/missions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3500",
+							"path": [
+								"missions"
+							]
+						},
+						"description": "Ce point de terminaison permet de créer des missions via une requête HTTP POST .\n\nLa requête doit inclure un corps JSON contenant les paramètres suivants :\n\n- **title** (string) : Le titre de la mission.\n    \n- **description** (string) : Une description de la mission.\n    \n- **startDate** (string) : La date et l'heure de début de la mission au format ISO 8601.\n    \n- **endDate** (string) : La date et l'heure de fin de la mission au format ISO 8601.\n    \n- **idUser** (object) : L'utilisateur associé à la mission.\n    \n\nLa réponse à la requête est un objet JSON avec le schéma suivant :\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"mission\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"idMission\": {\n          \"type\": \"integer\"\n        },\n        \"title\": {\n          \"type\": \"string\"\n        },\n        \"description\": {\n          \"type\": \"string\"\n        },\n        \"startDate\": {\n          \"type\": \"string\"\n        },\n        \"endDate\": {\n          \"type\": \"string\"\n        },\n        \"createdAt\": {\n          \"type\": \"string\"\n        },\n        \"idUser\": {\n          \"type\": \"integer\"\n        }\n      }\n    },\n    \"message\": {\n      \"type\": \"string\"\n    }\n  }\n}\n\n ```"
+					},
+					"response": [
+						{
+							"name": "createMission",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Beach Cleanup\",\r\n    \"description\": \"A community effort to clean up the local beach.\",\r\n    \"startDate\": \"2024-01-15T00:00:00Z\",\r\n    \"endDate\": \"2024-01-15T00:00:00Z\",\r\n    \"idUser\":{{idUser}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3500/missions",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3500",
+									"path": [
+										"missions"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "294"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"126-Y8wm9rSJbBWVDBjVQ+P+Trs4qa8\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Feb 2025 14:28:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"mission\": {\n        \"idMission\": 8,\n        \"title\": \"Beach Cleanup\",\n        \"description\": \"A community effort to clean up the local beach.\",\n        \"startDate\": \"2024-01-15T00:00:00.000Z\",\n        \"endDate\": \"2024-01-15T00:00:00.000Z\",\n        \"createdAt\": \"2025-02-27T14:28:26.000Z\",\n        \"idUser\": 6\n    },\n    \"message\": \"La mission Beach Cleanup a été créée\"\n}"
+						},
+						{
+							"name": "createMission",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Beach Cleanup\",\r\n    \"description\": \"A community effort to clean up the local beach.\",\r\n    \"startDate\": \"2024-01-15T00:00:00Z\",\r\n    \"endDate\": \"2024-01-15T00:00:00Z\",\r\n    \"idUser\":{{idUser}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3500/missions",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3500",
+									"path": [
+										"missions"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-mgpzOK0Eu3h+7d8O4Wu0HQWBVW0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Feb 2025 16:49:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Vous n'êtes pas connécté\"\n}"
+						},
+						{
+							"name": "createMission",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Beach Cleanup\",\r\n    \"description\": \"A community effort to clean up the local beach.\",\r\n    \"startDate\": \"2024-01-15T00:00:00Z\",\r\n    \"endDate\": \"2024-01-15T00:00:00Z\",\r\n    \"idUser\":{{idUser}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3500/missions",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3500",
+									"path": [
+										"missions"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3c-TDmUbepm2nd4C7FbvDx3fQqSKX0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 Feb 2025 16:54:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Vous n'avez pas les autorisations nécessaires\"\n}"
+						}
+					]
+				},
+				{
+					"name": "getMissions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3500/missions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3500",
+							"path": [
+								"missions"
+							]
+						},
+						"description": "Ce point de terminaison est utilisé pour récupérer une liste de missions.\n\n### Corps de la requête\n\nCe point de terminaison ne nécessite pas de corps de requête.\n\n### Corps de la réponse\n\n- **missions** : Un tableau d'objets mission contenant les détails de chaque mission.  \n    \n    - **idMission** : L'identifiant unique de la mission.\n        \n    - **title** : Le titre de la mission.\n        \n    - **description** : La description de la mission.\n        \n    - **startDate** : La date de début de la mission.\n        \n    - **endDate** : La date de fin de la mission.\n        \n    - **createdAt** : La date de création de la mission.\n        \n    - **idUser** : L'ID de l'utilisateur associé à la mission."
+					},
+					"response": []
+				},
+				{
+					"name": "getMission",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3500/missions/{{idMission}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3500",
+							"path": [
+								"missions",
+								"{{idMission}}"
+							]
+						},
+						"description": "### Requête\n\n#### Paramètre de chemin\n\n- **idMission** (string, requis) : L'identifiant unique de la mission.\n    \n- **URL** : `http://localhost:PORT/missions/{idMission}`\n    \n\n### Réponse\n\nLa réponse est un objet JSON contenant les détails de la mission :\n\n- **idMission** : L'identifiant unique de la mission.\n    \n- **title** : Le titre de la mission.\n    \n- **description** : La description de la mission.\n    \n- **startDate** : La date de début de la mission.\n    \n- **endDate** : La date de fin de la mission.\n    \n- **createdAt** : La date de création de la mission.\n    \n- **idUser** : L'ID de l'utilisateur associé à la mission.\n    \n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"idMission\": {\n            \"type\": \"integer\"\n        },\n        \"title\": {\n            \"type\": \"string\"\n        },\n        \"description\": {\n            \"type\": \"string\"\n        },\n        \"startDate\": {\n            \"type\": \"string\"\n        },\n        \"endDate\": {\n            \"type\": \"string\"\n        },\n        \"createdAt\": {\n            \"type\": \"string\"\n        },\n        \"idUser\": {\n            \"type\": \"integer\"\n        }\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "getCandidaturesByMission",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3500/missions/3/candidatures",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3500",
+							"path": [
+								"missions",
+								"3",
+								"candidatures"
+							]
+						},
+						"description": "### Récupérer les détails des candidatures par ID de mission\n\nCe point de terminaison permet de récupérer les détails des candidatures pour une mission spécifique en fournissant l'ID de la mission dans l'URL.\n\n### Requête\n\n- **Méthode** : GET\n    \n- **URL** : `http://localhost:PORT/candidatures/{idMission}`\n    \n\n### Réponse\n\nLa réponse est un objet JSON contenant les détails de la mission et des candidatures associées, avec les clés suivantes :\n\n- **idMission** (integer) : L'ID de la mission.\n    \n- **title** (string) : Le titre de la mission.\n    \n- **description** (string) : La description de la mission.\n    \n- **startDate** (string) : La date de début de la mission.\n    \n- **endDate** (string) : La date de fin de la mission.\n    \n- **createdAt** (string) : La date de création de la mission.\n    \n- **idUser** (integer) : L'ID de l'utilisateur associé à la mission.\n    \n- **candidatures** (array) : Un tableau contenant des objets de candidature.\n    \n\n#### Chaque objet de candidature contient :\n\n- **idCandidature** (integer) : L'ID de la candidature.\n    \n- **idMission** (integer) : L'ID de la mission.\n    \n- **idUser** (integer) : L'ID de l'utilisateur ayant soumis la candidature.\n    \n- **status** (string) : Le statut de la candidature.\n    \n- **users** (object) : Un objet contenant les informations de l'utilisateur.\n    \n    - **username** (string) : Le nom d'utilisateur de l'utilisateur qui a soumis la candidature.\n        \n\n### Exemple de schéma JSON de la réponse :\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"idMission\": {\n      \"type\": \"integer\"\n    },\n    \"title\": {\n      \"type\": \"string\"\n    },\n    \"description\": {\n      \"type\": \"string\"\n    },\n    \"startDate\": {\n      \"type\": \"string\"\n    },\n    \"endDate\": {\n      \"type\": \"string\"\n    },\n    \"createdAt\": {\n      \"type\": \"string\"\n    },\n    \"idUser\": {\n      \"type\": \"integer\"\n    },\n    \"candidatures\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"idCandidature\": {\n            \"type\": \"integer\"\n          },\n          \"idMission\": {\n            \"type\": \"integer\"\n          },\n          \"idUser\": {\n            \"type\": \"integer\"\n          },\n          \"status\": {\n            \"type\": \"string\"\n          },\n          \"users\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"username\": {\n                \"type\": \"string\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "updateMission",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Help elderly\",\r\n    \"description\": \"A mission in ehapad.\",\r\n    \"startDate\": \"2024-01-25T00:00:00Z\",\r\n    \"endDate\": \"2024-01-30T00:00:00Z\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3500/missions/{{idMission}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3500",
+							"path": [
+								"missions",
+								"{{idMission}}"
+							]
+						},
+						"description": "### Mettre à jour une mission\n\nCe point de terminaison est utilisé pour mettre à jour une mission spécifique.\n\n### Requête\n\n- **Méthode** : PUT\n    \n- **URL** : `http://localhost:PORT/missions/{idMission}`\n    \n\n#### Corps de la requête (JSON) :\n\n- **title** (string, requis) : Le titre de la mission.\n    \n- **description** (string, requis) : La description de la mission.\n    \n- **startDate** (string, requis) : La date de début de la mission.\n    \n- **endDate** (string, requis) : La date de fin de la mission.\n    \n\n### Réponse\n\nLa réponse à cette requête est un objet JSON avec le schéma suivant :\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"idMission\": {\n      \"type\": \"number\"\n    },\n    \"title\": {\n      \"type\": \"string\"\n    },\n    \"description\": {\n      \"type\": \"string\"\n    },\n    \"startDate\": {\n      \"type\": \"string\"\n    },\n    \"endDate\": {\n      \"type\": \"string\"\n    },\n    \"createdAt\": {\n      \"type\": \"string\"\n    },\n    \"idUser\": {\n      \"type\": \"number\"\n    }\n  }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteMission",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3500/missions/{{idMission}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3500",
+							"path": [
+								"missions",
+								"{{idMission}}"
+							]
+						},
+						"description": "### Supprimer une mission\n\nCe point de terminaison est utilisé pour supprimer une mission spécifique identifiée par son identifiant unique de mission.\n\n### Requête\n\n- **Méthode** : DELETE\n    \n- **URL** : `http://localhost:PORT/missions/{idMission}`\n    \n\n#### Paramètres de chemin\n\n- **idMission** : L'identifiant unique de la mission à supprimer.\n    \n\n### Réponse\n\nLa réponse à cette requête est un objet JSON avec le schéma suivant :\n\n- **idMission** : L'identifiant de la mission supprimée.\n    \n- **title** : Le titre de la mission supprimée.\n    \n- **description** : La description de la mission supprimée.\n    \n- **startDate** : La date de début de la mission supprimée.\n    \n- **endDate** : La date de fin de la mission supprimée.\n    \n- **createdAt** : La date de création de la mission supprimée.\n    \n- **idUser** : L'ID de l'utilisateur associé à la mission supprimée."
+					},
+					"response": []
+				}
+			],
+			"description": "## Gestion des Missions et des Candidatures\n\n# Création et Gestion des Missions\n\n- Les associations sont responsables de la création des missions.\n    \n- Une association peut **créer, modifier et supprimer** des missions.\n    \n- Un bénévole peut consulter la liste des missions disponibles et postuler à celles qui l'intéressent.\n    \n- Une association peut consulter la liste des candidatures en attente pour chaque mission."
+		},
+		{
+			"name": "candidatures",
+			"item": [
+				{
+					"name": "createCandidatures",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json()\r",
+									"pm.collectionVariables.set('idCandidature', response.candidature.idCandidature)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idMission\":11\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3500/candidatures",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3500",
+							"path": [
+								"candidatures"
+							]
+						},
+						"description": "### Créer une candidature\n\nCe point de terminaison permet de créer une nouvelle candidature pour une mission spécifique.\n\n### Corps de la requête (JSON)\n\n- **idMission** (string, requis) : L'ID de la mission pour laquelle la candidature est créée.\n    \n\n### Réponse\n\nLa réponse sera un objet JSON avec les propriétés suivantes :\n\n- **candidature** (objet) : Un objet contenant les détails de la candidature créée, incluant :\n    \n    - **idCandidature** (number) : L'ID de la candidature créée.\n        \n    - **idMission** (number) : L'ID de la mission pour laquelle la candidature est créée.\n        \n    - **idUser** (number) : L'ID de l'utilisateur ayant soumis la candidature.\n        \n    - **status** (string) : Le statut de la candidature.\n        \n- **message** (string) : Un message indiquant le statut de la requête.\n    \n\n### Exemple de schéma JSON de la réponse :\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"candidature\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"idCandidature\": {\n          \"type\": \"number\"\n        },\n        \"idMission\": {\n          \"type\": \"number\"\n        },\n        \"idUser\": {\n          \"type\": \"number\"\n        },\n        \"status\": {\n          \"type\": \"string\"\n        }\n      }\n    },\n    \"message\": {\n      \"type\": \"string\"\n    }\n  }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "updateCandidature",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\":\"acceptee\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3500/candidatures/{{idCandidature}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3500",
+							"path": [
+								"candidatures",
+								"{{idCandidature}}"
+							]
+						},
+						"description": "## Mettre à jour le statut d'une candidature\n\nCe point de terminaison permet de mettre à jour le statut d'une candidature spécifique, identifiée par le paramètre **idCandidature**.\n\n### Requête\n\n- **Méthode** : PUT\n    \n- **URL** : `http://localhost:PORT/candidatures/{idCandidature}`\n    \n\n#### Corps de la requête (JSON) :\n\n- **status** (string, requis) : Le nouveau statut à mettre à jour pour la candidature.\n    \n\n### Réponse\n\nLa réponse sera un objet JSON contenant les détails mis à jour de la candidature avec le schéma suivant :\n\n- **idCandidature** (integer) : L'ID de la candidature mise à jour.\n    \n- **idMission** (integer) : L'ID de la mission associée.\n    \n- **idUser** (integer) : L'ID de l'utilisateur ayant soumis la candidature.\n    \n- **status** (string) : Le nouveau statut de la candidature.\n    \n- **updatedAt** (string) : La date et l'heure de la dernière mise à jour.\n    \n\n### Exemple de schéma JSON de la réponse :\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"idCandidature\": {\n            \"type\": \"integer\"\n        },\n        \"idMission\": {\n            \"type\": \"integer\"\n        },\n        \"idUser\": {\n            \"type\": \"integer\"\n        },\n        \"status\": {\n            \"type\": \"string\"\n        }\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "getCandidaturesByUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3500/candidatures/benevole",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3500",
+							"path": [
+								"candidatures",
+								"benevole"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "- Un bénévole peut postuler à une mission. À la suite de la candidature, le statut de la candidature est \"En attente\".\n    \n- Une association peut accepter ou refuser la candidature dʼun bénévole.  \n    Le statut de la candidature doit être \"Acceptée\" ou \"Refusée\" en fonction de l'action de l'association ou “en attenteˮ par défaut."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "idMission",
+			"value": ""
+		},
+		{
+			"key": "idUser",
+			"value": ""
+		},
+		{
+			"key": "idCandidature",
+			"value": ""
+		}
+	]
+}
