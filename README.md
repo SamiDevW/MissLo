@@ -45,3 +45,7 @@ Utiliser les exemples fournis :
 
 - JsonMockedData
 - mockedData.js
+
+# Followed process
+
+![alt text](<FireShot Capture 015 - MissLo backend · MissLo build - [github.com]-1.png>)
