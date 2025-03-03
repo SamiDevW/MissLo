@@ -24,13 +24,13 @@ Pour demarrer l'application il faut :
 - lancer le serveur
   `npm run dev`
 
-# Using the api
+# Using the api :
 
 La documentation est disponible en ligne : https://documenter.getpostman.com/view/39337832/2sAYdhJptg
 
 - Note: la variable raw dans les exemples de requetes bug et s'affiche en string, mais c'est bien un json qui est attendu.
 
-# Doing tests
+# Doing tests :
 
 ## postman :
 
