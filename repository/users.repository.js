@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import prisma from './connectDB.js';
+import errorHandler from './dbErrors/errorHandler.js';
 
 
 class UsersRepository {
@@ -21,17 +21,6 @@ class UsersRepository {
             });
             await prisma.$disconnect();
             return user;
-        } catch (err) {
-            console.error(err)
-            await prisma.$disconnect();
-            errorHandler(err)
-        }
-    }
-    async getUsers() {
-        try {
-            const allUsers = await prisma.users.findMany();
-            await prisma.$disconnect();
-            return allUsers;
         } catch (err) {
             console.error(err)
             await prisma.$disconnect();

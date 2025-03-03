@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import prisma from './connectDB.js';
+import errorHandler from './dbErrors/errorHandler.js';
 
 
 class MissionsRepository {

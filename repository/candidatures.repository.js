@@ -1,6 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from './connectDB.js';
 import errorHandler from './dbErrors/errorHandler.js';
-const prisma = new PrismaClient();
+
 
 
 class CandidaturesRepository {

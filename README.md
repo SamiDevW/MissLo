@@ -24,15 +24,24 @@ Pour demarrer l'application il faut :
 - lancer le serveur
   `npm run dev`
 
-# Using the api
+# Using the api :
 
-La documentation est disponible en ligne : https://documenter.getpostman.com/view/39337832/2sAYdhJVZX
+La documentation est disponible en ligne : https://documenter.getpostman.com/view/39337832/2sAYdhJptg
 
 - Note: la variable raw dans les exemples de requetes bug et s'affiche en string, mais c'est bien un json qui est attendu.
 
-# Doing tests
+# Doing tests :
+
+## postman :
 
 Aprés avoir réussi les premières etapes.
 Pour faire les tests http, un fichier postman est disponible `MissLo.tests.json`
-Ce fichier doit être importé sur postman
-https://documenter.getpostman.com/view/39337832/2sAYdhJptg
+Ce fichier doit être importé sur postman.
+https://learning.postman.com/docs/getting-started/importing-and-exporting/importing-and-exporting-overview/
+
+## using fetch :
+
+Utiliser les exemples fournis :
+
+- JsonMockedData
+- mockedData.js
