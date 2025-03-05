@@ -1,6 +1,6 @@
 # MissLo
 
-API de gestion des missions locales
+API de gestion des missions locales (Examen blanc ccp2)
 
 # Base de données
 
