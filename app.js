@@ -6,7 +6,7 @@ import candidaturesRoute from './routes/candidaturesRoute.js'
 import cookieParser from 'cookie-parser'
 import jwtCheck from './middlewares/jwtCheck.js'
 import ExpressError from './utils/ExpressError.js'
-import DatabaseError from './repository/dbErrors/errorHandler.js'
+
 const app = express()
 const PORT = process.env.PORT
 app.use(cookieParser())

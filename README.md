@@ -11,6 +11,7 @@ La candidature => mission & à => l'utilisateur.
 Les deux types de base données (sql,nosql) peuvent etre utilisées dans ce cas (application simple).
 
 ![alt text](MissLo_DB.jpg)
+
 # Quickstart
 
 Pour demarrer l'application il faut :
