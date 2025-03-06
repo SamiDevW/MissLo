@@ -40,6 +40,19 @@ class UsersRepository {
             errorHandler(err)
         }
     }
+    async getUserById(idUser) {
+        try {
+            const user = await prisma.users.findUnique({
+                where: { idUser: idUser }
+            });
+            await prisma.$disconnect();
+            return user;
+        } catch (err) {
+            console.error(err)
+            await prisma.$disconnect();
+            errorHandler(err)
+        }
+    }
 }
 
 

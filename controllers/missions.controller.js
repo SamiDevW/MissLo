@@ -10,7 +10,7 @@ class MissionsController {
             res.status(400).json({ message: 'Bad Request' })
         }
         try {
-            const { idUser } = req.user
+            const { idUser } = req
             const mission = await this.missionsService.createMission(idUser, req.body)
             res.status(201).json({ mission, message: `La mission ${mission.title} a été créée` })
         } catch (err) {

@@ -1,6 +1,7 @@
 import express from 'express';
 import MissionsController from '../controllers/missions.controller.js';
 import { checkRoleAsso } from '../middlewares/checkRole.js';
+import isMissionAuthor from '../middlewares/isMissionAuthor.js';
 const router = express.Router();
 const missionsController = new MissionsController()
 
@@ -13,8 +14,8 @@ router.get('/missions/:idMission/candidatures', checkRoleAsso,
 
 router.route('/missions/:idMission')
     .get((req, res, next) => missionsController.getMission(req, res, next))
-    .put(checkRoleAsso, (req, res, next) => missionsController.updateMission(req, res, next))
-    .delete(checkRoleAsso, (req, res, next) => missionsController.deleteMission(req, res, next))
+    .put(checkRoleAsso, isMissionAuthor, (req, res, next) => missionsController.updateMission(req, res, next))
+    .delete(checkRoleAsso, isMissionAuthor, (req, res, next) => missionsController.deleteMission(req, res, next))
 
 export default router;
 

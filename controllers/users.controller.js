@@ -34,7 +34,6 @@ class UsersController {
             res.cookie('token', userCred.token, options)
             res.status(200).json({ message: `Bon retour ${userCred.foundUser.name}` })
         } catch (err) {
-            console.error(err);
             next(err)
         }
     }

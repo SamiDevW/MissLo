@@ -1,9 +1,8 @@
 import jwt from 'jsonwebtoken';
-const jwtSign = ({ idUser, user_role }) => {
+const jwtSign = ({ idUser }) => {
     return jwt.sign(
         {
-            idUser,
-            user_role
+            idUser
         },
         process.env.JWT_SECRET,
         { expiresIn: '1h' }

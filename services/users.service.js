@@ -35,5 +35,9 @@ class UsersService {
         }
 
     }
+    async getUserById(idUser) {
+        const user = this.usersRepository.getUserById(idUser)
+        return user;
+    }
 }
 export default UsersService;

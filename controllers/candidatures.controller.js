@@ -37,7 +37,7 @@ class CandidaturesController {
     }
     async getCandidaturesByUser(req, res, next) {
         try {
-            const { idUser } = req.user
+            const { idUser } = req
             const candidatures = await this.candidaturesService.getCandidaturesByUser(idUser)
             res.status(200).json(candidatures);
         } catch (err) {

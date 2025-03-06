@@ -4,6 +4,7 @@ class CandidaturesService {
         this.candidaturesRepository = new candidaturesRepository()
     }
     async createCandidature(idMission, idUser) {
+        // check if mission exists
         const candidature = await this.candidaturesRepository.createCandidature(idMission, idUser)
         return candidature;
     }
